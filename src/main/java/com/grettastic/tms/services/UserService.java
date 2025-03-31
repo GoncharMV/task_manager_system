@@ -1,5 +1,6 @@
 package com.grettastic.tms.services;
 
+import com.grettastic.tms.enums.Role;
 import com.grettastic.tms.model.User;
 import com.grettastic.tms.repo.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -29,7 +30,7 @@ public class UserService implements UserDetailsService {
         return new org.springframework.security.core.userdetails.User(
                 user.getEmail(),
                 user.getPassword(),
-                Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + user.getRole()))
+                Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + user.getRole().name()))
         );
     }
 
@@ -39,7 +40,7 @@ public class UserService implements UserDetailsService {
         savedUser.setEmail(user.getEmail());
         savedUser.setPassword(encodedPassword);
         savedUser.setName(user.getName());
-        savedUser.setRole(user.getRole());
+        savedUser.setRole(user.getRole() != null ? user.getRole() : Role.USER);
         return userRepo.save(savedUser);
     }
 
