@@ -22,12 +22,10 @@ public class Comment {
     @Column(nullable = false)
     private String text;
 
-    @Column(nullable = false)
     @ManyToOne
     @JoinColumn(name = "author_id", nullable = false)
     private User author;
 
-    @Column(nullable = false)
     @ManyToOne
     @JoinColumn(name = "task_id", nullable = false)
     private Task task;

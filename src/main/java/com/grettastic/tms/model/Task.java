@@ -28,9 +28,11 @@ public class Task {
     private TaskPriority priority;
 
     @ManyToOne
+    @JoinColumn(name = "author_id", nullable = false)
     private User author;
 
     @ManyToOne
+    @JoinColumn(name = "executor_id")
     private User executor;
 
     @OneToMany(mappedBy = "task", cascade = CascadeType.ALL)
