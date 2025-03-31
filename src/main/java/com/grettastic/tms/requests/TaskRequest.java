@@ -13,6 +13,6 @@ import lombok.Setter;
 public class TaskRequest {
     private TaskPriority priority;
     private String description;
-    private Long executor_id;
+    private Long executorId;
 
 }

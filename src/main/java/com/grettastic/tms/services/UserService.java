@@ -3,6 +3,8 @@ package com.grettastic.tms.services;
 import com.grettastic.tms.enums.Role;
 import com.grettastic.tms.model.User;
 import com.grettastic.tms.repo.UserRepository;
+import com.grettastic.tms.responses.UserResponse;
+import com.grettastic.tms.utils.UserMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -44,12 +46,22 @@ public class UserService implements UserDetailsService {
         return userRepo.save(savedUser);
     }
 
-    public List<User> getUsers() {
-        return userRepo.findAll();
+    public List<UserResponse> getUsers() {
+        return UserMapper.toUserResponseList(userRepo.findAll());
     }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    public User getUserByEmail(String email) {
+        return userRepo.findByEmail(email)
+                .orElseThrow(()-> new UsernameNotFoundException("User is not found"));
+    }
+
+    public User getUserById(Long userId) {
+        return userRepo.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User is not found"));
     }
 }

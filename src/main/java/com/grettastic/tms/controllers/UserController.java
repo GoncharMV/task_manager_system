@@ -1,6 +1,7 @@
 package com.grettastic.tms.controllers;
 
 import com.grettastic.tms.model.User;
+import com.grettastic.tms.responses.UserResponse;
 import com.grettastic.tms.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ public class UserController {
 
     @GetMapping
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<List<User>> getUsers() {
+    public ResponseEntity<List<UserResponse>> getUsers() {
         return ResponseEntity.ok(userService.getUsers());
     }
 
