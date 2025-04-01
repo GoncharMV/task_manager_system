@@ -31,7 +31,7 @@ API документация: OpenAPI (Swagger)
 
 ## Документация API
 
-Swagger UI доступен по адресу: http://localhost:8060/swagger-ui.html
+Swagger UI доступен по адресу: http://localhost:8060/swagger-ui/index.html
 
 ## Работа с Postman
 
