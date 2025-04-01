@@ -1,6 +1,8 @@
 package com.grettastic.tms.utils;
 
+import com.grettastic.tms.enums.Role;
 import com.grettastic.tms.model.User;
+import com.grettastic.tms.services.TaskService;
 import com.grettastic.tms.services.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.UtilityClass;
@@ -34,6 +36,11 @@ public class UserUtils {
     }
 
     public User findUserById(Long userId) {
-        return userService.getUserById(userId);
+        return userService.getUser(userId);
+    }
+
+    public boolean isAdmin(String principalName) {
+        User user = findUserByEmail(principalName);
+        return user != null && user.getRole() == Role.ADMIN;
     }
 }

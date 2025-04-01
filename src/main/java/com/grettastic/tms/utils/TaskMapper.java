@@ -14,11 +14,12 @@ public class TaskMapper {
         }
         return TaskResponse.builder()
                 .id(task.getId())
+                .title(task.getTitle())
                 .description(task.getDescription())
                 .priority(task.getPriority())
                 .status(task.getStatus())
-                .author(UserMapper.toUserResponse(task.getAuthor()))
-                .executor(UserMapper.toUserResponse(task.getExecutor()))
+                .authorId(UserMapper.toUserId(task.getAuthor()))
+                .executorId(UserMapper.toUserId(task.getExecutor()))
                 .comments(CommentsMapper.toCommentResponseList(task.getComments()))
                 .build();
     }

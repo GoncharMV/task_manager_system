@@ -23,6 +23,10 @@ public class UserMapper {
                 .build();
     }
 
+    public static Long toUserId(User user) {
+        return user == null ? null : user.getId();
+    }
+
     public static List<UserResponse> toUserResponseList(List<User> users) {
         List<UserResponse> userResponseList = new ArrayList<>();
         for (User u : users) {

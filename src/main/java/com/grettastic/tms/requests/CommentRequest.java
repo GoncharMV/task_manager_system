@@ -1,9 +1,9 @@
 package com.grettastic.tms.requests;
 
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,16 +13,9 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class LoginRequest {
-    @NotBlank
-    @NotEmpty
-    @NotNull
-    @Email
-    private String email;
+public class CommentRequest {
 
-    @NotBlank
-    @NotEmpty
-    @NotNull
-    private String password;
-
+    @Size(min = 20, max = 2000)
+    @NotBlank(message = "Text cannot be empty")
+    private String text;
 }

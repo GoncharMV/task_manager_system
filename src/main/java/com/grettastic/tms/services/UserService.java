@@ -5,7 +5,9 @@ import com.grettastic.tms.model.User;
 import com.grettastic.tms.repo.UserRepository;
 import com.grettastic.tms.responses.UserResponse;
 import com.grettastic.tms.utils.UserMapper;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,7 +21,7 @@ import java.util.Collections;
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
+@RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class UserService implements UserDetailsService {
     private final UserRepository userRepo;
 
@@ -57,11 +59,11 @@ public class UserService implements UserDetailsService {
 
     public User getUserByEmail(String email) {
         return userRepo.findByEmail(email)
-                .orElseThrow(()-> new UsernameNotFoundException("User is not found"));
+                .orElseThrow(()-> new EntityNotFoundException("User is not found"));
     }
 
-    public User getUserById(Long userId) {
+    public User getUser(Long userId) {
         return userRepo.findById(userId)
-                .orElseThrow(() -> new RuntimeException("User is not found"));
+                .orElseThrow(() -> new EntityNotFoundException("User is not found"));
     }
 }

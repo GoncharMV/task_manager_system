@@ -3,6 +3,9 @@ package com.grettastic.tms.model;
 import com.grettastic.tms.enums.Role;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,14 +24,15 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
     private String name;
 
-    @Column(unique = true, nullable = false)
+    @Column(unique = true)
     @Email
+    @NotNull(message = "email must not be null")
     private String email;
 
-    @Column(nullable = false)
+    @NotNull
+    @Size(min = 6)
     private String password;
 
     @Enumerated(EnumType.STRING)
