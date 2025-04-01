@@ -2,14 +2,11 @@ package com.grettastic.tms.utils;
 
 import com.grettastic.tms.enums.Role;
 import com.grettastic.tms.model.User;
-import com.grettastic.tms.services.TaskService;
 import com.grettastic.tms.services.UserService;
 import lombok.RequiredArgsConstructor;
-import lombok.experimental.UtilityClass;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Component;
 
 @Component
