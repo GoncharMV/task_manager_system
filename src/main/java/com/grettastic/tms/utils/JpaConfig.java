@@ -21,7 +21,7 @@ public class JpaConfig {
     @Bean
     public DataSource dataSource() {
         return DataSourceBuilder.create()
-                .url("jdbc:postgresql://localhost:5434/tmsdb")
+                .url("jdbc:postgresql://tms-db:5432/tmsdb")
                 .username("admin")
                 .password("admin")
                 .driverClassName("org.postgresql.Driver")

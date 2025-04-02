@@ -1,34 +1,33 @@
-version: "3"
+version: '3.8'
 
 services:
-  postgres:
-    image: postgres:latest
-    container_name: tms-db
-    restart: always
-    environment:
-      POSTGRES_DB: tmsdb
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: admin
+  tms-spring:
+    build: .
+    image: task-management-system-java
     ports:
-      - "5434:5432"
+      - "8060:8060"
+    environment:
+      - DB_HOST=tms-db
+      - DB_PORT=5432
+      - DB_NAME=tms
+      - DB_USER=admin
+      - DB_PASSWORD=admin
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://tms-db:5432/tmsdb
+      - SPRING_DATASOURCE_USERNAME=admin
+      - SPRING_DATASOURCE_PASSWORD=admin
+    depends_on:
+      - tms-db
+
+  tms-db:
+    image: postgres:17
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=tmsdb
     volumes:
       - postgres_data:/var/lib/postgresql/data
-
-  spring:
-    image: "tms-spring"
-    container_name: tms-spring
-    build:
-      dockerfile: Dockerfile
     ports:
-      - "8069:8069"
-    depends_on:
-      - postgres
-    environment:
-      TOMCAT_PORT: 8069
-      APP_URL: http://localhost:8060
-      DB_URL: jdbc:postgresql://postgres:5432/tmsdb
-      DB_USERNAME: admin
-      DB_PASSWORD: admin
+      - "5432:5432"
 
 volumes:
   postgres_data:
