@@ -1,19 +1,6 @@
+version: "3"
+
 services:
-
-  spring:
-    image: "tms-spring"
-    container_name: tms-spring
-    build:
-      dockerfile: Dockerfile
-    ports:
-      - "8181:8181"
-    depends_on:
-      - postgres
-    environment:
-      - SERVER_PORT=8181
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/tmsdb
-
-
   postgres:
     image: postgres:latest
     container_name: tms-db
@@ -26,6 +13,22 @@ services:
       - "5434:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+
+  spring:
+    image: "tms-spring"
+    container_name: tms-spring
+    build:
+      dockerfile: Dockerfile
+    ports:
+      - "8069:8069"
+    depends_on:
+      - postgres
+    environment:
+      TOMCAT_PORT: 8069
+      APP_URL: http://localhost:8060
+      DB_URL: jdbc:postgresql://postgres:5432/tmsdb
+      DB_USERNAME: admin
+      DB_PASSWORD: admin
 
 volumes:
   postgres_data:

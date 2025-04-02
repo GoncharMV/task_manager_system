@@ -1,13 +1,10 @@
-# the base image
-FROM amazoncorretto:21-alpine
+FROM maven:3.9.2-eclipse-temurin-11-alpine AS build
+COPY ./src /usr/src/tms/src
+COPY ./pom.xml /usr/src/tms
+RUN mvn -f /usr/src/tms/pom.xml clean install
 
-# the JAR file path
-ARG JAR_FILE=target/*.jar
-
-# Copy the JAR file from the build context into the Docker image
-COPY ${JAR_FILE} application.jar
-
-CMD apt-get update -y
-
-# Set the default command to run the Java application
-ENTRYPOINT ["java", "-Xmx2048M", "-jar", "/application.jar"]
+### Run
+FROM azul/zulu-openjdk-alpine:21
+COPY ./target/tms-0.0.1-SNAPSHOT.jar /usr/src/tms/app.jar
+EXPOSE 8089
+ENTRYPOINT ["java","-jar","/usr/src/tms/app.jar"]
