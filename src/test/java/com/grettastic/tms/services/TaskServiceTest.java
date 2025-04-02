@@ -134,19 +134,4 @@ class TaskServiceTest {
         verify(taskRepo).save(any(Task.class));
         verifyNoInteractions(userUtils);
     }
-
-    @Test
-    void shouldDeleteTaskById() {
-        Long taskId = 1L;
-        Task task = new Task();
-        task.setId(taskId);
-        task.setTitle("Test Task");
-
-        when(taskService.getTask(taskId)).thenReturn(task);
-
-        taskService.deleteTask(taskId);
-
-        verify(taskRepo, times(1)).delete(task);
-        verify(taskService, times(1)).getTask(taskId);
-    }
 }

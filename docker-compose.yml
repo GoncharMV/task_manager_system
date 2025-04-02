@@ -1,7 +1,22 @@
 services:
+
+  spring:
+    image: "tms-spring"
+    container_name: tms-spring
+    build:
+      dockerfile: Dockerfile
+    ports:
+      - "8181:8181"
+    depends_on:
+      - postgres
+    environment:
+      - SERVER_PORT=8181
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/tmsdb
+
+
   postgres:
     image: postgres:latest
-    container_name: tms
+    container_name: tms-db
     restart: always
     environment:
       POSTGRES_DB: tmsdb
