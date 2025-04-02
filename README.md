@@ -25,7 +25,7 @@ API документация: OpenAPI (Swagger)
 
 2. Запуск с помощью Docker Compose
    ```
-    mvn clean install -DskipTests
+    mvnw clean install -DskipTests
     docker-compose up --build
    ```
 4. После успешного запуска API будет доступно по адресу: http://localhost:8060
