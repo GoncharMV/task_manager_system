@@ -19,7 +19,7 @@ API документация: OpenAPI (Swagger)
 
 1. Клонирование репозитория
    ```
-    git clone https://github.com/your-repo/task-management-system.git
+    git clone https://github.com/GoncharMV/task-management-system.git
     cd task-management-system
    ```
 
