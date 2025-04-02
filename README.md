@@ -19,8 +19,8 @@ API документация: OpenAPI (Swagger)
 
 1. Клонирование репозитория
    ```
-    git clone https://github.com/GoncharMV/task-management-system.git
-    cd task-management-system
+    git clone https://github.com/GoncharMV/task-manager-system.git
+    cd task-manager-system
    ```
 
 2. Запуск с помощью Docker Compose
