@@ -19,12 +19,13 @@ API документация: OpenAPI (Swagger)
 
 1. Клонирование репозитория
    ```
-    git clone https://github.com/GoncharMV/task-manager-system.git
+    git clone https://github.com/GoncharMV/task_manager_system.git
     cd task-manager-system
    ```
 
 2. Запуск с помощью Docker Compose
    ```
+    mvn clean package -DskipTests
     docker-compose up --build
    ```
 4. После успешного запуска API будет доступно по адресу: http://localhost:8060
